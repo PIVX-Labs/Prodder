@@ -55,7 +55,7 @@ async function checkPRs() {
                 .setTitle('🚀 New Pull Request ready for Review! (#' + pull.number + ')')
                 .setColor(0xA042FF)
                 .setDescription(`### Title: ${pull.title}\n${instructions ? `### 💰 Testing Reward: __${nReviewReward} PIV__\n\n` + instructions : 'This Pull Request has no testing instructions, so Quality Control members may skip it.'}\n\n### 🔧 Developer(s) of this Pull Request:\n**${fullPull.assignees.map(a => a.login).join(', ')}**\n> For any reporting, suggestions or otherwise, contact the above developers of this Pull Request, happy Quality Controlin'!`);
-            webhook.send({ content: '<@&1092919854778044496>', embeds: [embed] });
+            webhook.send({ content: instructions ? '<@&1092919854778044496>' : 'New PR!', embeds: [embed] });
 
             reviewedPRs.push({ number: pull.number });
             fs.writeFileSync('reviewedPRs.json', JSON.stringify(reviewedPRs));
